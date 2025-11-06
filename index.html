@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
+    />
+    <title>Spectrum3</title>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <link rel="stylesheet" href="./spectrum3.css" />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+    ></script>
+  </head>
+
+  <body>
+    <div
+      class="block_container"
+      style="background-color: #00b5e2; margin-left: 10%; margin-right: 10%"
+    >
+      <p></p>
+      <p></p>
+      <br />
+
+      <h1>Explore the Visible Spectrum with a Webcam</h1>
+
+      <h2>CIIEC-BUAP</h2>
+
+      <p style="font-size: 30px; margin-left: 80%">October 25, 2025</p>
+      <p style="font-size: 20px; margin-left: 80%">
+        <a href="https://github.com/lvillasen/Webcam-Spectrometer/"
+          >Source Code</a
+        >
+      </p>
+
+      <hr />
+      <button class="new_styled" aria-pressed="false" onclick="introBlock()">
+        Introduction
+      </button>
+      <div id="introBlock">
+        <p
+          style="
+            font-family: system-ui, sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 1em auto;
+            text-align: justify;
+          "
+        >
+ This web application demonstrates how to build a simple, low-cost optical spectrometer using a 
+ manually focused commercial webcam as the detector. 
+ The setup includes a 3D-printed enclosure that mounts directly onto the webcam, 
+ a narrow slit covered with a thin layer of wax paper for light diffusion, and a small piece of a DVD that serves as a diffraction grating. 
+</p>
+
+<figure>
+          <img
+            src="./spectrometer.png"
+            alt="Descripción imagen 1"
+            width="500"
+            style="display: block; margin: auto; border: 2px solid black"
+          />
+          <figcaption>
+            Photograph of the optical spectrometer described in this web application.          </figcaption>
+        </figure>
+
+        <p
+          style="
+            font-family: system-ui, sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 1em auto;
+            text-align: justify;
+          "
+        >
+ The DVD fragment disperses the incoming light into its component wavelengths, allowing the webcam to capture the resulting spectrum. The 3D-printed enclosure ensures precise alignment between the slit, the grating, and the camera lens.
+          <br><br>
+          This application provides both the OpenSCAD source code and the STL file required to fabricate the spectrometer enclosure with a 3D printer. The assembled spectrometer is shown in the photograph above.
+          
+          </p>
+
+      </div>
+
+      <hr />
+      <button class="new_styled" aria-pressed="false" onclick="designBlock()">
+        Design and Construction
+      </button>
+      <div id="designBlock">
+        <p
+  style="
+    font-family: system-ui, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 1em auto;
+    text-align: justify;
+  "
+>
+  The design focuses on adapting a custom 3D-printed enclosure to a webcam.
+  We selected the <b>GETTTECH FHD 1080p 30 FPS webcam</b>, which features manual focus and a 100-degree field of view.
+  The enclosure includes a <b>1.5 cm × 1.5 cm window</b> that allows the user to make a <b>0.5 mm × 0.5 cm slit</b> at the optimal position for the best spectral results.
+  The slit can be easily constructed using two small pieces of rigid plastic, such as material cut from old credit cards.
+  <br><br>
+  Inside the box, a <b>2 cm × 3 cm fragment of a DVD</b> is mounted flat on one of the inner walls, as shown in the image below.
+  For better results, remove the <b>polycarbonate plastic layer</b> from the DVD fragment.
+  The DVD grooves are carefully aligned with the slit inside the enclosure.
+  Incoming light strikes the DVD at a <b>grazing-incidence angle</b>, which simplifies the optical geometry while improving angular resolution.
+  <br><br>
+  As can be calculated using
+  this
+  <a
+    href="https://ciiec.buap.mx/Spectrum1"
+    target="_blank"
+    rel="noopener"
+    >web application</a
+  >—the same tool used to obtain the figure below—grazing incidence has the property that diffraction angles change very little when the incidence angle varies slightly.
+</p>
+
+<figure style="max-width: 800px; margin: 1em auto; text-align: center;">
+  <img
+    src="./design.png"
+    alt="Diagram illustrating diffraction angles of light from a DVD fragment under grazing incidence"
+    width="500"
+    style="display: block; margin: auto; border: 2px solid black;"
+  />
+  <figcaption style="font-size: 0.95rem; margin-top: 0.5em;">
+    Diffraction angles of three colors produced by a DVD fragment with
+    1350 tracks per millimeter under a grazing incidence of 4°. Image
+    source:
+    <a
+      href="https://ciiec.buap.mx/Spectrum1"
+      target="_blank"
+      rel="noopener"
+    >
+      ciiec.buap.mx/Spectrum1</a
+    >. Note that the diffraction orders appear symmetrically around
+    the bisector of the incident and reflected light beams (indicated
+    by dotted lines), but this image shows only one side of each
+    order.
+  </figcaption>
+</figure>
+
+<p
+  style="
+    font-family: system-ui, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 1em auto;
+    text-align: justify;
+  "
+>
+  The design also allows the <b>enclosure to slide over the webcam</b>, enabling fine adjustment of focus and alignment to achieve the best spectral resolution.
+</p>
+
+<figure style="max-width: 800px; margin: 1em auto; text-align: center;">
+  <img
+    src="./items.png"
+    alt="Photograph showing the 3D-printed enclosure with the DVD fragment, plastic slit, and wax-paper diffuser"
+    width="500"
+    style="display: block; margin: auto; border: 2px solid black;"
+  />
+  <figcaption style="font-size: 0.95rem; margin-top: 0.5em;">
+    Photograph of the enclosure box with the piece of DVD in position,
+    a slit made of rigid plastic, and a piece of wax paper covering the slit.
+  </figcaption>
+</figure>        <br /><br />
+        
+      </div>
+
+      <hr />
+      <button class="new_styled" aria-pressed="false" onclick="boxBlock()">
+        Spectrometer Enclosure
+      </button>
+      <div id="boxBlock">
+        <p
+          style="
+            font-family: system-ui, sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 1em auto;
+            text-align: justify;
+          "
+        >The enclosure box is modeled in the <a
+            href="https://openscad.org/"
+            target="_blank"
+            rel="noopener"
+            >OpenSCAD </a> code below.</p> 
+        
+<pre style="
+  background: #f0f0f0;
+  color: #000;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-x: auto;
+  white-space: pre;
+  width: 650px;              /* ancho fijo */
+  margin: 20px auto;         /* centrado */
+"><code class="language-c">
+th = 1.5;         // Thickness of walls (mm)
+box_x = 15.5+th;       
+box_y = 32.5+2*th;       
+box_z = 130;       
+
+// Rectangular window
+rect_z = 40;       
+
+// Window for slit
+slot_x = 12;   
+slot_y = 12;   
+slot_th = th;   
+
+// --- Rectangular box, window on YZ plane and window on XY plane ---
+module box() {
+    difference() {
+        // External box
+        cube([box_x, box_y, box_z]);
+
+        // Internal hollow
+        translate([th, th, th])
+            cube([box_x - 2*th, box_y - 2*th, box_z - 2*th]);
+
+        // --- Rectangular window on YZ plane
+        translate([0, th, th])
+            cube([th, box_y-2*th, rect_z]);
+
+        // --- Window for slit
+        translate([(box_x - slot_x)/2, (box_y - slot_y)/2, box_z - slot_th])
+            cube([slot_x, slot_y, slot_th]);
+    }
+    translate([-2*th,0,0]) cube([2*th,th,box_z]);
+    translate([-2*th,box_y-th,0]) cube([2*th,th,130]);
+}
+
+box();
+</code></pre>
+<br>
+ <p
+          style="
+            font-family: system-ui, sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 1em auto;
+            text-align: justify;
+          "
+        >
+The STL file can be downloaded from  <a href="enclosure.stl" download="enclosure.stl">here.</a>
+ </p>       
+
+        
+        
+        </p>
+      </div>
+
+      <hr />
+
+      <button class="new_styled" aria-pressed="false" onclick="testBlock()">
+        Test
+      </button>
+      <div id="testBlock">
+        <p
+          style="
+            font-family: system-ui, sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 1em auto;
+            text-align: justify;
+          "
+        >A test of the optical spectrometer described is presented here, using a compact fluorescent lamp (CFL) as the light source and this <a
+            href="https://ciiec.buap.mx/Spectrum2"
+            target="_blank"
+            rel="noopener"
+            >web application </a> to acquire and to calibrate the webcam data.</p>
+<figure>
+          <img
+            src="./spectrum1.png"
+            alt="Descripción imagen 1"
+            width="600"
+            style="display: block; margin: auto; border: 2px solid black"
+          />
+          <figcaption>
+Spectrum of a compact fluorescence lamp obtained with the optical spectrometer described and this <a
+            href="https://ciiec.buap.mx/Spectrum2"
+            target="_blank"
+            rel="noopener"
+            >web application. </a>  </figcaption>      </figure>
+<figure>
+          <img
+            src="./spectrumDVD.png"
+            alt="Descripción imagen 1"
+            width="600"
+            style="display: block; margin: auto; border: 2px solid black"
+          />
+          Spectrum of a compact fluorescence lamp obtained with the optical spectrometer described and this <a
+            href="https://ciiec.buap.mx/Spectrum2"
+            target="_blank"
+            rel="noopener"
+            >web application. </a>  </figcaption>         </figure>
+
+         <p
+  style="
+    font-family: system-ui, sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 1em auto;
+    text-align: justify;
+  "
+>
+  Note that this spectrometer is calibrated only in wavelength, not in absolute intensity.
+  Furthermore, the color webcam used has a Bayer filter that distorts the relative intensities of different wavelengths.
+  A future version of
+  <a
+    href="https://ciiec.buap.mx/Spectrum2"
+    target="_blank"
+    rel="noopener"
+    >the Spectrum2 web application</a
+  >
+  will include intensity calibration to correct for the uneven spectral response of the webcam sensor.
+</p>
+
+      </div>
+
+      <hr />
+    </div>
+    <script src="./spectrum3.js"></script>
+  </body>
+</html>
