@@ -234,7 +234,7 @@ module box() {
             cube([box_x - 2*th, box_y - 2*th, box_z - 2*th]);
 
         // --- Rectangular window on YZ plane
-        translate([0, th, 2+th])
+        translate([0, th, 2*th])
             cube([th, box_y-2*th, rect_z]);
 
         // --- Window for slit
